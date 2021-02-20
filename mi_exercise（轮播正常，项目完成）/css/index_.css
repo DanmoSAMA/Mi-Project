@@ -86,7 +86,6 @@
 .header{
     height: 100px;
     line-height: 100px;
-    /* background-color: red; */
 }
 .logo{
     text-indent: -9999px;
@@ -170,12 +169,75 @@
 .goods-info{
     width: 100%;
     height: 0;
+    /* height: 228px; */
     background-color: #fff;
     position: absolute;
     top: 140px;
     z-index: 9999;
     left: 0;
-    transition: height 0.3s; 
+    transition: height 0.4s; 
+    overflow: hidden;
+}
+.goods-info ul{
+    display: none;
+    /*这样每一个Tab栏的图片就可以独占一行了*/
+}
+.goods-info ul li{
+    float: left;
+    width: 204px;
+    height: 201px;
+    position: relative;
+}
+.goods-info ul li a{
+    display: block;
+    width: 180px;
+    height: 166px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+.goods-info ul li a::after{
+    display: block;
+    content: '';
+    width: 1.5px;
+    height: 100px;
+    background-color: #D3D3D3;
+    position: relative;
+    left: -10px;
+}
+.goods-info ul li:first-of-type a::after{
+    display: none;
+}
+.goods-info ul li img{
+    width: 160px;
+    height: 110px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+.goods-info p{
+    position: absolute;
+    text-align: center;
+    width: 180px;
+    height: 20px;
+    line-height: 20px;
+    padding-top: 0;
+    font-size: 12px;
+}
+.goods-info p:nth-of-type(1){
+    top: 120px;
+    color: #333333;
+}
+.goods-info p:nth-of-type(2){
+    top: 140px;
+    color: #FF6700;
+}
+.Tab ul.show{
+    /*需要提高该选择器的优先级*/
+    display: flex;     /*Tab切换*/
 }
 .show-goods:hover ~ .goods-info,
 .goods-info:hover{
@@ -285,6 +347,56 @@
 }
 .next:hover{
     background-position: -41px;
+}
+.left-goods-info{
+    position: absolute;
+    display: none;
+    /* display: flex; */
+    flex-flow: row wrap;
+    align-content: flex-start;
+    flex-shrink: 0;
+    top: 0;
+    left: 233px;
+    /* width: 993px; */
+    height: 459px;
+    background-color: #fff;
+    overflow: hidden;
+    border-top: 1px solid #E0E0E0;
+    box-shadow: 0px 10px 16px rgba(0, 0, 0, .2);
+}
+.left-goods-info ul{
+    height: 459px;
+    /* width: 496px; */
+    display: none;
+    flex-flow: column wrap;
+    align-content: flex-start;
+}
+.left-goods-info a{
+    display: inline-block;
+    width: 208px;
+    height: 40px;
+    padding: 18px 20px;
+    position: relative;
+}
+.left-goods-info a img{
+    width: 40px;
+    height: 40px;
+}
+.left-goods-info a span{
+    display: inline-block;
+    width: 140px;
+    height: 40px;
+    line-height: 40px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto 6px;
+    font-size: 14px;
+    color: #333;
+    transition: 0.2s color;
+}
+.left-goods-info a:hover span{
+    color: #F46800;
 }
 .left-info{
     margin-top: 14px;

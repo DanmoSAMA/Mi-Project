@@ -1,4 +1,59 @@
 window.onload = function(){
+    //Tab栏切换1
+    let TabArr = document.getElementsByClassName("Tab");
+    let showArr1 = document.getElementsByClassName("tab-show1");
+    let ulArr1 = TabArr[0].getElementsByTagName("ul");
+    for(let i = 0; i < ulArr1.length; i++){
+        showArr1[i].index = i;
+        showArr1[i].onmouseover = function () {
+            for(let i = 0; i < ulArr1.length; i++){
+                ulArr1[i].className = "w";
+            }
+            ulArr1[this.index].className = "w show";
+        }
+    }
+    //Tab栏切换2
+    let ulArr2 = TabArr[1].getElementsByTagName("ul");
+    let showArr2 = document.getElementsByClassName("tab-show2");
+    for(let i = 0; i < ulArr2.length; i++){
+        showArr2[i].index = i;
+        showArr2[i].onmouseover = function () {
+            TabArr[1].style.display = "flex";   
+            //因为Tab栏和左侧的条目没写在一个容器里，不构成子元素或兄弟元素的关系，所以用JS实现hover效果
+            for(let i = 0; i < ulArr2.length; i++){
+                ulArr2[i].className = "";
+            }
+            ulArr2[this.index].className = "show";
+
+            //修改ul和外层容器的宽度
+            let itemArr = ulArr2[this.index].getElementsByTagName("a");
+            let col = Math.ceil((itemArr.length)/6);
+            //一开始，这里忘了加单位px，只用加一次
+            ulArr2[this.index].style.width = (itemArr[0].clientWidth) * col + "px";
+            TabArr[1].style.width = parseInt(ulArr2[this.index].style.width) + 1 + "px";
+        }
+        //暂时容忍了"回调地狱"的出现(懒得试验Promise和Generator...)
+        showArr2[i].onmouseout = function(){
+            let itemArr = ulArr2[this.index].getElementsByTagName("a");
+            for(i = 0; i < itemArr.length; i++){
+                itemArr[i].onmouseover = function(){
+                    TabArr[1].style.display = "flex";
+                    //防止鼠标移动到a上后tab栏关闭
+                }
+                TabArr[1].onmouseover = function(){
+                    TabArr[1].style.display = "flex";
+                }
+                TabArr[1].onmouseout = function(){
+                    TabArr[1].style.display = "none";
+                }
+            }
+        }
+        showArr2[i].addEventListener("mouseout",leave);
+        function leave(){
+            TabArr[1].style.display = "none";
+        }
+    }
+    
     //轮播图1
     let prev = document.getElementsByClassName("prev")[0];
     let next = document.getElementsByClassName("next")[0];
